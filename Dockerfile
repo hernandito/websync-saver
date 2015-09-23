@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER sparklyballs <sparkly@madeupemail.com>
+MAINTAINER hernandito
 
 # Set correct environment variables
 ENV DEBIAN_FRONTEND=noninteractive TERM=xterm LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
@@ -12,6 +12,8 @@ CMD ["/sbin/my_init"]
 
 # Add required files that are local
 ADD src/ /root/
+
+RUN apt-get install -qy mc
 
 # Set the locale
 RUN locale-gen en_US.UTF-8 && \

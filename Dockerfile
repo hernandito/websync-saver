@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER hernandito
+MAINTAINER hernandito 
 
 # Set correct environment variables
 ENV DEBIAN_FRONTEND=noninteractive TERM=xterm LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
@@ -13,7 +13,6 @@ CMD ["/sbin/my_init"]
 # Add required files that are local
 ADD src/ /root/
 
-RUN apt-get install -qy mc
 
 # Set the locale
 RUN locale-gen en_US.UTF-8 && \
@@ -31,7 +30,7 @@ chmod +x /etc/service/websync/run && \
 
 # update apt and get node build deps
 apt-get update && \
-apt-get install git nodejs npm wget sshpass -y && \
+apt-get install git nodejs npm mc wget sshpass -y && \
 cp /usr/bin/nodejs /usr/bin/node && \
 npm install -g bower && \
 npm install -g gulp
@@ -52,4 +51,5 @@ gulp dist
 # reset user to root for runtime
 USER root
 
-VOLUME ["/nobody/websync/dist" ]
+ 
+

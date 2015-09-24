@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER sparklyballs <sparkly@madeupemail.com>
+MAINTAINER hernandito
 
 # Set correct environment variables
 ENV DEBIAN_FRONTEND=noninteractive TERM=xterm LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
@@ -29,7 +29,7 @@ chmod +x /etc/service/websync/run && \
 
 # update apt and get node build deps
 apt-get update && \
-apt-get install git nodejs npm wget sshpass -y && \
+apt-get install git nodejs npm mc wget sshpass -y && \
 cp /usr/bin/nodejs /usr/bin/node && \
 npm install -g bower && \
 npm install -g gulp
@@ -40,9 +40,9 @@ USER nobody
 
 # fetch websync files
 RUN cd /nobody && \
-git clone https://github.com/furier/websync.git && \
+git clone https://github.com/furier/websync && \
 cd websync && \
-git checkout 27d58e540b3dcdd89d870e4bf1decadfece9ebcb && \ 
+git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e && \ 
 npm install && \
 bower install && \
 gulp dist

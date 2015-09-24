@@ -39,13 +39,13 @@ ENV HOME /nobody
 USER nobody
 
 # fetch websync files
-RUN cd /nobody 
-RUN git clone https://github.com/furier/websync 
-RUN cd websync
-RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
-RUN npm install 
-RUN bower install
-RUN gulp dist
+cd /nobody 
+git clone https://github.com/furier/websync 
+cd websync
+git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
+npm install 
+bower install
+gulp dist
 
 # reset user to root for runtime
 USER root

@@ -56,6 +56,7 @@ USER nobody
 
 # fetch websync files
 
+
 #RUN sh /root/install.sh
 RUN cd /nobody 
 RUN git clone https://github.com/furier/websync 

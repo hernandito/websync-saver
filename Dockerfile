@@ -32,13 +32,15 @@ CMD ["/sbin/my_init"]
 
 # Add required files that are local
 ADD src/ /root/
-UN chmod +x /root/install.sh
+#RUN chmod +x /root/install.sh
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
 
 # fix up start file
 RUN mkdir -p /etc/service/websync
+RUN mkdir -p /nobody/websync/dist
+
 
 RUN mv /root/start.sh /etc/service/websync/run
 RUN chmod +x /etc/service/websync/run
@@ -55,7 +57,7 @@ ENV HOME /nobody
 USER nobody
 
 # fetch websync files
-RUN sh /root/install.sh
+#RUN sh /root/install.sh
 
 # reset user to root for runtime
 USER root

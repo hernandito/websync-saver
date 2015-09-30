@@ -1,8 +1,28 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER hernandito
+MAINTAINER hernando
+
 
 # Set correct environment variables
-ENV DEBIAN_FRONTEND=noninteractive TERM=xterm LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+ENV HOME /root
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV TERM xterm
+
+# Use baseimage-docker's init system
+CMD ["/sbin/my_init"]
+
+# Configure user nobody to match unRAID's settings
+ RUN \
+ usermod -u 99 nobody && \
+ usermod -g 100 nobody && \
+ usermod -d /home nobody && \
+ chown -R nobody:users /home
+
+# Disable SSH
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+
 
 # set ports
 EXPOSE 3000
@@ -14,25 +34,21 @@ CMD ["/sbin/my_init"]
 ADD src/ /root/
 
 # Set the locale
-RUN locale-gen en_US.UTF-8 && \
+RUN locale-gen en_US.UTF-8
 
-# Fix a Debianism of the nobody's uid being 65534
-usermod -u 99 nobody && \
-usermod -g 100 nobody && \
-mkdir -p /nobody && \
-chown -R nobody:users /nobody && \
+
 
 # fix up start file
-mkdir -p /etc/service/websync && \
-mv /root/start.sh /etc/service/websync/run && \
-chmod +x /etc/service/websync/run && \
+RUN mkdir -p /etc/service/websync
+RUN mv /root/start.sh /etc/service/websync/run
+RUN chmod +x /etc/service/websync/run
 
 # update apt and get node build deps
-apt-get update && \
-apt-get install git nodejs npm mc wget sshpass -y && \
-cp /usr/bin/nodejs /usr/bin/node && \
-npm install -g bower && \
-npm install -g gulp
+RUN apt-get update
+RUN apt-get install git nodejs npm mc wget sshpass -y 
+RUN cp /usr/bin/nodejs /usr/bin/node 
+RUN npm install -g bower
+RUN npm install -g gulp
 
 # set user nobody and home to /nobody
 ENV HOME /nobody

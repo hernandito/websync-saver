@@ -58,9 +58,9 @@ USER nobody
 
 
 #RUN sh /root/install.sh
-RUN cd /nobody 
+WORKDIR /nobody 
 RUN git clone https://github.com/furier/websync 
-RUN cd /nobody/websync
+WORKDIR /nobody/websync
 #RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
 RUN npm install 
 RUN bower install

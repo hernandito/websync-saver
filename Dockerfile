@@ -32,6 +32,7 @@ CMD ["/sbin/my_init"]
 
 # Add required files that are local
 ADD src/ /root/
+UN chmod +x /root/install.sh
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
@@ -54,13 +55,7 @@ ENV HOME /nobody
 USER nobody
 
 # fetch websync files
-RUN cd /nobody 
-RUN git clone https://github.com/furier/websync 
-RUN cd websync
-#RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
-RUN npm install 
-RUN bower install
-RUN gulp dist
+RUN sh /root/install.sh
 
 # reset user to root for runtime
 USER root

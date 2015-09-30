@@ -16,4 +16,4 @@
 
 chown -R root:root /nobody
 cd /nobody/websync/dist
-node server.js
+#node server.js

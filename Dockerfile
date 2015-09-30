@@ -36,10 +36,9 @@ ADD src/ /root/
 # Set the locale
 RUN locale-gen en_US.UTF-8
 
-
-
 # fix up start file
 RUN mkdir -p /etc/service/websync
+
 RUN mv /root/start.sh /etc/service/websync/run
 RUN chmod +x /etc/service/websync/run
 
@@ -55,18 +54,19 @@ ENV HOME /nobody
 USER nobody
 
 # fetch websync files
-cd /nobody 
-git clone https://github.com/furier/websync 
-cd websync
-git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
-npm install 
-bower install
-gulp dist
+RUN cd /nobody 
+RUN git clone https://github.com/furier/websync 
+RUN cd websync
+#RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
+RUN npm install 
+RUN bower install
+RUN gulp dist
 
 # reset user to root for runtime
 USER root
 
- 
+ # The www directory and proxy config location
+VOLUME ["/Backups", "/Source", "/nobody/websync/dist"]
 
 
 

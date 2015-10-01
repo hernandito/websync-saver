@@ -1,12 +1,6 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 
-=======
-sudo nobody
-
-#cp /Source/cache/appdata/websync/wsdata.json /nobody/websync/dist/wsdata.json
->>>>>>> origin/master
 #if [ ! -f /nobody/websync/dist/wsdata.json ]; then
 #    echo "File not found!"
 #	cd /root 
@@ -20,8 +14,6 @@ sudo nobody
 #	gulp dist	
 #cp /Source/mnt/cache/appdata/websync/wsdata.json /nobody/websync/dist/wsdata.json		
 #fi
-
-sudo root
 
 chown -R root:root /nobody
 cd /nobody/websync/dist

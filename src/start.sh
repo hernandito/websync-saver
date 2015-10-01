@@ -15,6 +15,7 @@
 #cp /Source/mnt/cache/appdata/websync/wsdata.json /nobody/websync/dist/wsdata.json		
 #fi
 
+
 chown -R root:root /nobody
 cd /nobody/websync/dist
 node server.js

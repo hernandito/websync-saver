@@ -1,0 +1,2 @@
+
+cp /nobody/websync/dist/wsdata.json /Source/cache/appdata/websync/wsdata.json

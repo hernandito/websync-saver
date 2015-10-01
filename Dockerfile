@@ -39,7 +39,6 @@ RUN locale-gen en_US.UTF-8
 
 # fix up start file
 RUN mkdir -p /etc/service/websync
-RUN mkdir -p /nobody/websync/dist
 
 RUN mv /root/start.sh /etc/service/websync/run
 RUN chmod +x /etc/service/websync/run
@@ -48,8 +47,7 @@ RUN chmod +x /etc/service/websync/run
 RUN apt-get update
 RUN apt-get install git nodejs npm mc wget sshpass -y 
 RUN cp /usr/bin/nodejs /usr/bin/node 
-RUN npm install -g bower
-RUN npm install -g gulp
+
 
 # set user nobody and home to /nobody
 ENV HOME /nobody
@@ -59,6 +57,14 @@ USER nobody
 
 
 #RUN sh /root/install.sh
+WORKDIR /nobody 
+RUN git clone https://github.com/furier/websync.git
+WORKDIR /nobody/websync
+#RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
+RUN npm install 
+RUN npm install -g bower
+RUN bower install 
+gulp dist
 
 
 # reset user to root for runtime

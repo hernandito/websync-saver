@@ -39,6 +39,10 @@ RUN locale-gen en_US.UTF-8
 
 # fix up start file
 RUN mkdir -p /etc/service/websync
+<<<<<<< HEAD
+=======
+#RUN mkdir -p /nobody/websync/dist
+>>>>>>> origin/master
 
 RUN mv /root/start.sh /etc/service/websync/run
 RUN chmod +x /etc/service/websync/run

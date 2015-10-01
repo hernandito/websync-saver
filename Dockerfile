@@ -57,7 +57,7 @@ USER nobody
 
 #RUN sh /root/install.sh
 WORKDIR /nobody 
-RUN git clone https://github.com/furier/websync.git
+RUN git clone https://github.com/furier/websync
 WORKDIR /nobody/websync
 #RUN git checkout 6988c949a20f10d96cb54b8cd9fe4636a654153e  
 RUN npm install 
